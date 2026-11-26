@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="SKYPOST — Island Courier: fly the Kestrel between island airstrips, thread golden rings, and bring the mail home.">
+<link rel="icon" href="data:,">
+<title>SKYPOST — Island Courier</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<canvas id="game" aria-label="SKYPOST Island Courier: fly the Kestrel between island airstrips"></canvas>
+
+<div id="hud" class="hidden" aria-hidden="true">
+  <div class="hud-top-left">
+    <div class="gauge"><span class="gauge-label">AIRSPEED</span><span class="gauge-value" id="hud-speed">0</span><span class="gauge-unit">kt</span></div>
+    <div class="gauge"><span class="gauge-label">ALTITUDE</span><span class="gauge-value" id="hud-alt">0</span><span class="gauge-unit">ft</span></div>
+    <div class="gauge"><span class="gauge-label">HEADING</span><span class="gauge-value" id="hud-hdg">000° N</span><span class="gauge-unit" id="hud-compass"></span></div>
+    <div class="gauge"><span class="gauge-label">VERT SPEED</span><span class="gauge-value small" id="hud-vsi">+0 fpm</span></div>
+    <canvas id="hud-horizon" width="84" height="84" aria-hidden="true"></canvas>
+  </div>
+  <div class="hud-top-right">
+    <div class="mission-title" id="hud-mission">FIRST LIGHT</div>
+    <ul class="objectives" id="hud-objectives"></ul>
+    <div class="hud-score-line"><span id="hud-score">SCORE 0</span><span id="hud-timer">00:00</span></div>
+  </div>
+  <div class="hud-bottom-left">
+    <div class="bar-row"><span class="bar-label" id="hud-throttle-text">THR 0%</span><div class="bar"><div class="bar-fill throttle" id="hud-throttle-bar"></div></div></div>
+    <div class="bar-row"><span class="bar-label" id="hud-fuel-text">FUEL 100%</span><div class="bar"><div class="bar-fill fuel" id="hud-fuel-bar"></div></div></div>
+    <div class="bar-row"><span class="bar-label">DAMAGE</span><div class="bar"><div class="bar-fill damage" id="hud-damage-bar"></div></div></div>
+  </div>
+  <div class="hud-bottom-right">
+    <span id="hud-gear">GEAR DOWN</span>
+    <span id="hud-flaps">FLAPS UP</span>
+    <span id="hud-wind">WIND CALM</span>
+    <span id="hud-stall" class="stall">STALL</span>
+  </div>
+  <div id="hud-message" class="hud-message"></div>
+</div>
+
+<div id="screen-title" class="screen">
+  <div class="panel title-panel">
+    <div class="eyebrow">A BUSH-PLANE COURIER GAME</div>
+    <h1>SKYPOST</h1>
+    <p class="subtitle">Island Courier — fly the Kestrel between the island strips, thread the golden rings, and bring the mail home before the fuel runs out.</p>
+    <button id="btn-fly" class="big-button" type="button">Fly a sortie</button>
+    <p class="controls">↑ ↓ pitch &nbsp;·&nbsp; ← → bank &amp; turn &nbsp;·&nbsp; W / S throttle &nbsp;·&nbsp; G gear &nbsp;·&nbsp; F flaps &nbsp;·&nbsp; C camera &nbsp;·&nbsp; P pause &nbsp;·&nbsp; M sound</p>
+    <p class="footnote">Three sorties. One tank of fuel. No two landings alike.</p>
+  </div>
+</div>
+
+<div id="screen-briefing" class="screen hidden">
+  <div class="panel">
+    <h2>Choose a sortie</h2>
+    <p class="subtitle">The mail does not fly itself. Pick a run — each one ends on a runway, if you fly it right.</p>
+    <div id="mission-list" class="mission-list"></div>
+    <button id="btn-back" class="ghost-button" type="button">Back</button>
+  </div>
+</div>
+
+<div id="screen-pause" class="screen hidden">
+  <div class="panel small-panel">
+    <h2>Paused</h2>
+    <p class="subtitle">The Kestrel is holding her breath.</p>
+    <button id="btn-resume" class="big-button" type="button">Keep flying</button>
+    <button id="btn-restart-pause" class="ghost-button" type="button">Restart sortie</button>
+    <button id="btn-quit-pause" class="ghost-button" type="button">Back to title</button>
+  </div>
+</div>
+
+<div id="screen-end" class="screen hidden">
+  <div class="panel small-panel">
+    <h2 id="end-title">Sortie complete</h2>
+    <div id="end-medal" class="medal"></div>
+    <p class="subtitle" id="end-reason"></p>
+    <p class="end-score" id="end-score"></p>
+    <p class="end-detail" id="end-detail"></p>
+    <button id="btn-again" class="big-button" type="button">Fly it again</button>
+    <button id="btn-missions" class="ghost-button" type="button">Choose another sortie</button>
+  </div>
+</div>
+
+<p id="status" role="status" aria-live="polite"></p>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
